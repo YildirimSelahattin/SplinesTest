@@ -43,6 +43,16 @@ public class CarController : MonoBehaviour
         transform.position = newPosition;
         transform.rotation = splineRotation;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Time.timeScale = 0;
+            GameManager.Instance.endGameUI.SetActive(true);
+        }
+
+    }
 }
 
 
