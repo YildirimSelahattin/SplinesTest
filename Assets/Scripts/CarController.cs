@@ -20,6 +20,7 @@ public class CarController : MonoBehaviour
     {
         // Get the SplineAnimate component
         splineAnimate = GetComponent<SplineAnimate>();
+        StartCoroutine(ChangeSpeed());
     }
 
     private void Update()
@@ -51,7 +52,16 @@ public class CarController : MonoBehaviour
             Time.timeScale = 0;
             GameManager.Instance.endGameUI.SetActive(true);
         }
+    }
 
+    IEnumerator ChangeSpeed()
+    {
+        yield return new WaitForFixedUpdate();
+        if(splineAnimate.MaxSpeed < 6)
+        {
+            splineAnimate.MaxSpeed += .001f;
+        }
+        StartCoroutine(ChangeSpeed());
     }
 }
 
